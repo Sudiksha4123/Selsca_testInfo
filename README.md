@@ -36,5 +36,14 @@ running/set-up your module:
     run npm run dev
     open localhost 3000 in browser.
     
-Below is the referance photos 
+Below is the referance photos :
 
+Below mentioned is the HOME page which contains the uploading Instructions,
+
+![Screenshot (11)](https://user-images.githubusercontent.com/113330666/189598365-af434f56-8184-416e-b6ec-9fab5163e2e6.png)
+
+And the upload page is below in which we can do drag and drop for the images and take the images from the file manager as well.
+
+![Screenshot (9)](https://user-images.githubusercontent.com/113330666/189598805-63133418-c8ae-44cf-bb16-5651bcee81de.png)
+
+![Screenshot (10)](https://user-images.githubusercontent.com/113330666/189598834-5cdbdc74-beaa-4122-bbb6-c3d03a0e0b5b.png)
