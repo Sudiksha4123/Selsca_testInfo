@@ -47,3 +47,6 @@ And the upload page is below in which we can do drag and drop for the images and
 ![Screenshot (9)](https://user-images.githubusercontent.com/113330666/189598805-63133418-c8ae-44cf-bb16-5651bcee81de.png)
 
 ![Screenshot (10)](https://user-images.githubusercontent.com/113330666/189598834-5cdbdc74-beaa-4122-bbb6-c3d03a0e0b5b.png)
+
+
+The cropped image will be uploaded to the database along with the name given, if you want to connect this to your own mongo database change the port mentioned in backend app.js file and frontend App.js .
