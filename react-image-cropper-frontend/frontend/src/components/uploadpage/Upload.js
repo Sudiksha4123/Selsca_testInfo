@@ -54,7 +54,7 @@ function Upload() {
           onImageCropped={(croppedImage) => setCroppedImage(croppedImage)}
         /></div></div>
         <div className="container2">
-      {croppedImage && (
+      {croppedImage  (
         <div>
           <h2>Cropped Image</h2>
           <img alt="Cropped Img" src={croppedImage} className="img2"/><br/>
