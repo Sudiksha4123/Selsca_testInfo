@@ -47,7 +47,7 @@ app.post("/Register",(req,res)=>{
         if(user){
             res.send({message:"user already exist"})
         }else {
-            const user = new User({name,email,password})
+            const user = new User({name,email,password,image})
             user.save(err=>{
                 if(err){
                     res.send(err)
