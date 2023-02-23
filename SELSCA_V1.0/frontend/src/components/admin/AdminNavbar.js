@@ -22,6 +22,11 @@ const AdminNavbar = () => {
                             setisDrawerOpen(false)}
 
         },
+        {
+            text:"Users List",
+            onClick: () => {navigate('/admin/userData')
+                            setisDrawerOpen(false)}
+        }
         
     ]
     

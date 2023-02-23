@@ -9,6 +9,8 @@ import Login from './components/common/Login';
 import UserProfile from './components/common/UserProfile.js';
 import TeacherNavbar from './components/teacher/TeacherNavbar.js';
 import StudentNavbar from './components/student/StudentNavbar.js';
+import UserData from './components/admin/UserData.js';
+import GradesCenter from './components/teacher/GradesCenter.js';
 
 
 function App() {
@@ -48,7 +50,8 @@ function App() {
 
   return(
 
-    <ThemeProvider theme={MainTheme}> //the main theme can be found in the ./components/styles/styles.js file 
+    <ThemeProvider theme={MainTheme}> 
+    {/* the main theme can be found in the ./components/styles/styles.js file  */}
     <CssBaseline />
   
     <Routes>
@@ -56,10 +59,11 @@ function App() {
       <Route path='/admin' element={<AdminLayout />}>
         <Route path='register' element={<Register />} />
         <Route path='userprofile' element={<UserProfile />} />
-
+        <Route path='userData' element={<UserData />} />
       </Route>
       <Route path='/teacher' element={<TeacherLayout />}>
           <Route path='userprofile' element={<UserProfile />} />
+          <Route path='gradescenter' element={<GradesCenter />} />
       </Route>
       <Route path='/student' element={<StudentLayout />} >
       <Route path='userprofile' element={<UserProfile />} />

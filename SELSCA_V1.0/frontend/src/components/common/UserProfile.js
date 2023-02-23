@@ -69,7 +69,7 @@ const UserProfile = () => {
             </Grid>
 
             {/* conditionally rendering the right components depending on the role of the user */}
-            {role === "teacher" || role === "student" &&
+            {(role === "teacher" || role === "student") &&
             <>
             <Grid item xs={6} display="flex" justifyContent={'right'} alignItems="center">
                     <Typography 

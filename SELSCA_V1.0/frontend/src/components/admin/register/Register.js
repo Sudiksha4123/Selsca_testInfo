@@ -10,6 +10,7 @@ const Register = () => {
     const [email , setEmail] = useState()
     const [name , setName] = useState("");
     const [password , setPassword] = useState("");
+    const [aadhar , setAadhar] = useState("");
     const [classno , setClassno] = useState("");
     const [dob , setDob] = useState("");
 
@@ -34,6 +35,12 @@ const Register = () => {
             Swal.fire({
                 icon : 'warning',
                 text : 'Please enter password'
+            })
+        }
+        else if (aadhar === "") {
+            Swal.fire({
+                icon : 'warning',
+                text : 'Please enter Aadhar no.'
             })
         }
         else if (classno === "" && role ==='student'){
@@ -67,6 +74,7 @@ const Register = () => {
                 name : name,
                 email : email,
                 password : password,
+                aadhar: aadhar,
                 class : classno,
                 DOB : Date(dob)
             }
@@ -86,6 +94,25 @@ const Register = () => {
                     Swal.fire({
                         icon : 'success',
                         title : 'Admin successfully registered'
+                    })
+                    ClearForm()
+                })
+                .catch(err => {
+                    console.log(err)
+                    Swal.fire({
+                        icon : 'error',
+                        title : err.response.data.message
+                    })
+                })
+            }
+            else if (role === "headmaster") {
+                console.log('test')
+                axios.post("http://localhost:5000/register/registerHeadmaster" , newUser)
+                .then(res => {
+                    Swal.close()
+                    Swal.fire({
+                        icon : 'success',
+                        title : 'Headmaster successfully registered'
                     })
                     ClearForm()
                 })
@@ -153,6 +180,7 @@ const Register = () => {
                     }}
                     onChange={(e) => {setRole(e.target.value)}}>
                         <MenuItem value="admin">Admin</MenuItem>
+                        <MenuItem value="headmaster">Headmaster</MenuItem>
                         <MenuItem value="teacher">Teacher</MenuItem>
                         <MenuItem value="student">Student</MenuItem>
                     </Select>
@@ -175,6 +203,7 @@ const Register = () => {
                         sx={{paddingRight:3}} 
                     >Email :</Typography>
                     </Grid>
+                    
                     <Grid item xs ={6}>
                         <TextField variant="filled" onChange={(e) => {setEmail(e.target.value)}}> </TextField>
                     </Grid>
@@ -184,14 +213,23 @@ const Register = () => {
                         sx={{paddingRight:3}} 
                         >Password :</Typography>
                     </Grid>
+                    
                     <Grid item xs ={6}>
                         <TextField type='password' variant="filled" onChange={(e) => {setPassword(e.target.value)}}> </TextField>
                     </Grid>
-
+                    <Grid item xs={6} display="flex" justifyContent={'right'} alignItems="center">
+                        <Typography 
+                        variant="register1" 
+                        sx={{paddingRight:3}}
+                        >Aadhar :</Typography>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <TextField variant="filled" onChange={(e) => {setAadhar(e.target.value)}} ></TextField>
+                    </Grid>
 
                         {/* selectively rendering the neccessary inputs depending on the role (teacher or student) */}
                     {
-                         role=== "teacher" &&
+                         (role=== "teacher" || role=== "headmaster") &&
                         <>
                         <Grid item xs ={6} display="flex" justifyContent={'right'} alignItems="center">
                             <Typography 
@@ -229,6 +267,7 @@ const Register = () => {
                     }
                     <Grid item xs={12} display="flex" justifyContent={"center"} alignItems="center" >
                         <Button variant="contained" onClick={handleSubmit}>Submit</Button>
+                        <Button onClick={() => {console.log(aadhar)}} >show aadhar</Button>
                     </Grid>
                 </Grid>
                 </Container>

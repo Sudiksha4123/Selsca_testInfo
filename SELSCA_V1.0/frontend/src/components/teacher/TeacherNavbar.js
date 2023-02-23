@@ -16,6 +16,11 @@ const TeacherNavbar = () => {
             onClick : () => {navigate('/teacher/userprofile')
                             setisDrawerOpen(false)}
         },
+        {
+            text:"Grades Center",
+            onClick : () => {navigate('/teacher/gradescenter')
+                            setisDrawerOpen(false)}
+        },
         
     ]
     
