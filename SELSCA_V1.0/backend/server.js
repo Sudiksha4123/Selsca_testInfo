@@ -10,6 +10,8 @@ require("dotenv").config();
 // routes for API requests 
 var registerRoute = require("./routes/register");
 var loginRoute = require('./routes/login');
+var userDataRoute = require('./routes/userdata');
+var gradesRoute = require('./routes/grades');
 
 // middleware
 app.use(cors());
@@ -30,6 +32,8 @@ connection.once('open' , function(){
 //API endpoints
 app.use("/register" , registerRoute);
 app.use("/login" , loginRoute);
+app.use("/userData" , userDataRoute);
+app.use("/grades" , gradesRoute);
 
 
 //starting of the server on PORT(specified in the .env file)

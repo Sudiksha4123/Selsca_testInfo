@@ -5,20 +5,28 @@ const TeacherSchema = new Schema({
 
     name:{
         type: String,
-        require: true
+        required: true
     },
     email:{
         type: String,
-        require: true
+        required: true
     },
     password:{
         type: String,
-        require: true
+        required: true
+    },
+    aadhar: {
+        type : String,
     },
     DOB :{
         type: Date,
-        require: true
     },
+    address : {
+        type : String
+    },
+    gender : {
+        type : String,
+    }
 })
 
 module.exports = Teacher = mongoose.model('Teacher' , TeacherSchema);

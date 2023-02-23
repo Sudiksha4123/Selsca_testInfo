@@ -6,6 +6,8 @@ var bcrypt = require('bcrypt');
 const Admin = require("../models/Admin");
 const Teacher = require("../models/Teacher");
 const Student = require("../models/Student");
+const Headmaster = require("../models/Headmaster");
+const Grades = require("../models/Grades");
 
 //admin registration function which hashes the given passwords and creates a new admin object in the mongoDB database
 router.post("/registerAdmin" , async(req,res) => {
@@ -15,7 +17,10 @@ router.post("/registerAdmin" , async(req,res) => {
      const admin = new Admin({
           name : req.body.name,
           email : req.body.email,
-          password : hashedPassword
+          password : hashedPassword,
+          aadhar : req.body.aadhar,
+          address : req.body.address,
+          gender : req.body.gender,
      })
 
      Admin.create(admin)
@@ -36,7 +41,9 @@ router.post("/registerTeacher" , async(req,res) => {
           name : req.body.name,
           email : req.body.email,
           password : hashedPassword,
-          DOB : req.body.DOB
+          aadhar : req.body.aadhar,
+          DOB : req.body.DOB,
+          address : req.body.address,
      })
 
      Teacher.create(teacher)
@@ -48,26 +55,84 @@ router.post("/registerTeacher" , async(req,res) => {
      })
 })
 
+
+router.post('/registerHeadmaster' , async (req,res) => {
+     const salt = await bcrypt.genSalt(10);
+     const hashedPassword = await bcrypt.hash(req.body.password , salt);
+
+     const headmaster = new Headmaster({
+          name: req.body.name,
+          email : req.body.email,
+          password : hashedPassword,
+          aadhar : req.body.aadhar,
+          DOB : req.body.DOB,
+          address : req.body.address,
+          gender : req.body.gender,
+     })
+     
+     Headmaster.create(headmaster)
+     .then(hea => {
+          res.status(200).send(hea)
+     })
+     .catch(err => {
+          res.status(400).send(err)
+     })
+})
+
 //student registration function which hashes the given passwords and creates a new student object in the mongoDB database
 router.post("/registerStudent" , async(req,res) => {
      const salt = await bcrypt.genSalt(10);
      const hashedPassword = await bcrypt.hash(req.body.password , salt);
+     const subjects = ["English" , "Maths" , "Science" , "Hindi" , "Social"]
 
      const student = new Student({
           name : req.body.name,
           email : req.body.email,
+          aadhar : req.body.aadhar,
           password : hashedPassword,
           class : req.body.class,
           DOB : req.body.DOB
      })
 
+     
+     for (let i=0; i < subjects.length ; i++) {
+          subject = subjects[i];
+          console.log(subject)
+          
+          const newGrades = new Grades({
+               studentName : req.body.name,
+               studentID : req.body.aadhar,
+               subject : subject,
+               fa1 : null,
+               fa2 : null,
+               sa1: null,
+               fa3 : null,
+               fa4 : null,
+               sa2 : null,
+               finalGrade : null
+          })
+          
+          Grades.create(newGrades)
+          .then(gra => {
+               console.log("grades successfully registered")
+          })
+          .catch(err => {
+               console.log(err)
+          })
+          
+     }
+     
      Student.create(student)
-     .then(tea => {
-          res.status(200).send(tea)
+     .then(stu => {
+          res.status(200).send(stu)
      })
      .catch(err => {
+          console.log(err)
           res.status(400).send(err)
      })
+     
+
+
 })
 
 

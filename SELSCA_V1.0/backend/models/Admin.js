@@ -13,6 +13,16 @@ const AdminSchema = new Schema({
     password : {
         type : String,
         required : true
+    },
+    aadhar : {
+        type : String,
+    },
+    address : {
+        type : String,
+    
+    },
+    gender : {
+        type : String,
     }
 })
 

@@ -57,6 +57,7 @@ router.post('/' , async (req,res) => {
 
         if (role == 'teacher') {
             const teacher = await Teacher.findOne({email : email})
+            console.log('test')
             
             if (!teacher) {
                 return res.status(401).json({

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const StudentSchema = new Schema({
+const HeadmasterSchema = new Schema({
 
     name:{
         type: String,
@@ -15,17 +15,18 @@ const StudentSchema = new Schema({
         type: String,
         required: true
     },
-    aadhar : {
+    aadhar: {
         type : String,
-        required : true
     },
-    DOB:{
+    DOB :{
         type: Date,
     },
-    class: {
-        type: String,
-        required: true
+    address : {
+        type : String
+    },
+    gender : {
+        type : String,
     }
 })
 
-module.exports = Student = mongoose.model('Student' , StudentSchema);
+module.exports = Headmaster = mongoose.model('Headmaster' , HeadmasterSchema);
