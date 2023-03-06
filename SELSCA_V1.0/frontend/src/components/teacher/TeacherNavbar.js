@@ -25,7 +25,7 @@ const TeacherNavbar = () => {
     ]
     
     return (
-        <AppBar position="static" >
+        <AppBar position="static" sx={{ backgroundColor: '#d9d9d9' }} >
             <Toolbar>
                 <IconButton
                 size = "large" edge="start"
@@ -52,7 +52,7 @@ const TeacherNavbar = () => {
 
                 </Drawer>
                 {/* the logout button which will clear all items stored in local storage and navigate to the login page */}
-                <Button sx={{marginLeft:'auto'}} color="secondary"
+                <Button sx={{marginLeft:'auto'}} color="primary"
                 onClick={() => {
                     localStorage.clear();
                     navigate('/')

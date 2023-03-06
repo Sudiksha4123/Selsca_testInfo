@@ -11,6 +11,10 @@ import TeacherNavbar from './components/teacher/TeacherNavbar.js';
 import StudentNavbar from './components/student/StudentNavbar.js';
 import UserData from './components/admin/UserData.js';
 import GradesCenter from './components/teacher/GradesCenter.js';
+import Grades from './components/student/grades.js';
+import Studentcal from './components/student/studentcal.js';
+import Gradesview from './components/student/gradesview.js';
+
 
 
 function App() {
@@ -67,6 +71,9 @@ function App() {
       </Route>
       <Route path='/student' element={<StudentLayout />} >
       <Route path='userprofile' element={<UserProfile />} />
+      <Route path='grades' element={<Grades />} />
+      <Route path ='calender' element={<Studentcal/>} />
+      <Route path='gardesview' element={<Gradesview/>}/>
       </Route>
     </Routes>
 

@@ -5,6 +5,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Swal from 'sweetalert2';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "./../../styles/styles.css";
 
 
 const Login = () => {
@@ -102,10 +103,7 @@ const Login = () => {
                     </Grid>
                         <Grid item xs={6} padding={3}>
                             <Select value={role} label="Role"
-                            sx={{
-                                backgroundColor : "#a3a2a2",
-                                color : "#242424"
-                            }}
+                            className="inputRounded"
                              onChange={(e) => {setRole(e.target.value)}}>
                                 <MenuItem value="admin">Admin</MenuItem>
                                 <MenuItem value="teacher">Teacher</MenuItem>
@@ -113,10 +111,12 @@ const Login = () => {
                             </Select>
                         </Grid>
                         <Grid item xs={12} padding={3}>
-                            <TextField label='Email' placeholder="Enter Email" onChange={(e) => {setEmail(e.target.value)}}></TextField>
+                            <TextField label='Email' placeholder="Enter Email"
+                            className="inputRounded" onChange={(e) => {setEmail(e.target.value)}}></TextField>
                         </Grid>
                         <Grid item xs={12} padding ={3}>
-                            <TextField type='password' label='Password' placeholder="Enter Password" onChange={(e) => {setPassword(e.target.value)}}></TextField>
+                            <TextField type='password' label='Password' placeholder="Enter Password" 
+                            className="inputRounded" onChange={(e) => {setPassword(e.target.value)}}></TextField>
                         </Grid>
                         <Grid item xs={12} padding ={3}>
                             <Button variant='contained' onClick={handleSubmit}>Login</Button>

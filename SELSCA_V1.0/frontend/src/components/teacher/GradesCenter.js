@@ -74,6 +74,8 @@ const GradesCenter = () => {
                     Swal.fire({
                         icon : 'success',
                         title : 'Grades successfully submitted!'
+                    }).then(function() {
+                        window.location.reload(false);
                     })
         })
         .catch(err => {
@@ -88,21 +90,16 @@ const GradesCenter = () => {
  
 
     return(
-            <Container>
+  
+        <>
+        <Container >
 
-            <Box sx={{border: 3 ,
-                        borderRadius: '8px',
-                        borderColor: "#333333" ,
-                        width :"90vw" ,
-                        maxheight: "50 vh" ,
-                        overflow:"auto",
-                    }} >
             <Select value={subject} label="Subject"
                             sx={{
-                                backgroundColor : "#a3a2a2",
+                                backgroundColor : "#cccccc2",
                                 color : "#242424"
                             }}
-                             onChange={(e) => {setSubject(e.target.value)}}>
+                            onChange={(e) => {setSubject(e.target.value)}}>
                                 <MenuItem value="English">English</MenuItem>
                                 <MenuItem value="Maths">Maths</MenuItem>
                                 <MenuItem value="Science">Science</MenuItem>
@@ -121,10 +118,10 @@ const GradesCenter = () => {
                 {grades.map((mainitem,i) => (
                     <tr key={i} >
                             {itemKeys.map((item,j) => {
-
+                                
                                 if ( itemKeys[j] === "studentName") {
                                     return (
-
+                                        
                                         <td style={{width:150, textAlign:'center' , backgroundColor:"#d1d1d1"}}>
                                             <Typography variant="overline" 
                                                 sx={{color:"#333333",
@@ -135,30 +132,34 @@ const GradesCenter = () => {
                                             </Typography>
                                         </td>
                                     )} else {   
-                                    return(
-
-                                        <td>
+                                        return(
+                                            
+                                            <td>
                                     <TextField 
                                         type="number" 
                                         id={j} 
-                                        sx ={{backgroundColor : "#2e2e2e"}}
+                                        sx ={{backgroundColor : "#cccccc"}}
                                         onChange={(e) => handleChange(e,i,item)}
                                         placeholder={mainitem[item]} 
-                                    ></TextField>
+                                        ></TextField>
                                     </td>
                                     )}
                                 }
-                            )}
+                                )}
                         </tr>
                     ))}
                 </tbody>
             </table>
-                    </Box>
-            <Button onClick={() => {console.log(grades)}} >show grades</Button>
+            </Container>
+            <Container >
+
+            <Button onClick={() => {console.log(grades[1]["fa2"])}} >show grades</Button>
             <Button onClick={getGrades} >get grades</Button>
             <Button onClick={submitGrades} > submit grades</Button>
-
+            <Button onClick={() => {console.log(grades)}} ></Button>
             </Container>
+            </>
+
     )
 
 }

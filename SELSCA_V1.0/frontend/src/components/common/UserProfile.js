@@ -46,25 +46,29 @@ const UserProfile = () => {
             <Grid item xs={6} display="flex" justifyContent={'right'} alignItems="center">
                 <Typography 
                 variant="register1" 
-                sx={{paddingRight:3}}
+                sx={{paddingRight:3,
+                    color : "#242424"}}
                 >Name :</Typography>
             </Grid>
             <Grid item xs ={6} >
             <Typography 
                 variant="register1" 
-                sx={{paddingRight:3}}
+                sx={{paddingRight:3,
+                    color : "#242424"}}
                 >{user.name}</Typography>
             </Grid>
             <Grid item xs={6} display="flex" justifyContent={'right'} alignItems="center">
                 <Typography 
                 variant="register1" 
-                sx={{paddingRight:3}} 
+                sx={{paddingRight:3,
+                    color : "#242424"}} 
                >Email :</Typography>
             </Grid>
             <Grid item xs ={6}>
             <Typography 
                 variant="register1" 
-                sx={{paddingRight:3}} 
+                sx={{paddingRight:3,
+                    color : "#242424"}} 
                >{user.email}</Typography>
             </Grid>
 
@@ -74,13 +78,15 @@ const UserProfile = () => {
             <Grid item xs={6} display="flex" justifyContent={'right'} alignItems="center">
                     <Typography 
                     variant="register1" 
-                    sx={{paddingRight:3}} 
+                    sx={{paddingRight:3,
+                        color : "#242424"}} 
                     >Date of Birth :</Typography>
                 </Grid>
                 <Grid item xs ={6}>
                     <Typography 
                     variant="register1" 
-                   sx={{paddingRight:3}} 
+                   sx={{paddingRight:3,
+                    color : "#242424"}} 
                     >{user.DOB}</Typography>
                 </Grid>
             </>
@@ -91,13 +97,15 @@ const UserProfile = () => {
                 <Grid item xs={6} display="flex" justifyContent={'right'} alignItems="center">
                     <Typography 
                     variant="register1" 
-                    sx={{paddingRight:3}} 
+                    sx={{paddingRight:3,
+                        color : "#242424"}} 
                     >class :</Typography>
                 </Grid>
                 <Grid item xs ={6}>
                     <Typography 
                     variant="register1" 
-                   sx={{paddingRight:3}} 
+                   sx={{paddingRight:3,
+                    color : "#242424"}} 
                     >{user.class}</Typography>
                 </Grid>
                 </>

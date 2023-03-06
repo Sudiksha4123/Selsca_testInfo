@@ -16,11 +16,27 @@ const StudentNavbar = () => {
             onClick : () => {navigate('/student/userprofile')
                             setisDrawerOpen(false)}
         },
+        {
+            text:"Grades Dashboard",
+            onClick : () => {navigate('/student/grades')
+                            setisDrawerOpen(false)}
+        },
+        {
+            text:"Attendence board",
+            onClick : () => {navigate('/student/calender')
+                            setisDrawerOpen(false)}
+        },
+        {
+            text:"Grades View",
+            onClick : () => {navigate('/student/gardesview')
+                            setisDrawerOpen(false)}
+        },
+
         
     ]
     
     return (
-        <AppBar position="static" >
+        <AppBar position="static" sx={{ backgroundColor: '#d9d9d9' }} >
             <Toolbar>
                 <IconButton
                 size = "large" edge="start"
@@ -47,7 +63,7 @@ const StudentNavbar = () => {
 
                 </Drawer>
                 {/* the logout button which will clear all items stored in local storage and navigate to the login page */}
-                <Button sx={{marginLeft:'auto'}} color="secondary"
+                <Button sx={{marginLeft:'auto'}} color="primary"
                 onClick={() => {
                     localStorage.clear();
                     navigate('/')

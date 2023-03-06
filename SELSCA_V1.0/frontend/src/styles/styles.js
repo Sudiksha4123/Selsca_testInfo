@@ -10,11 +10,11 @@ const MainTheme = createTheme({
           main: '#2DCDDF',
         },
         background: {
-          default: '#c4c4c4',
+          default: '#F5F5F5;',
           paper: '#424242',
         },
         text: {
-          primary: '#ffebee',
+          primary: '#242424',
         },
       },
       components : {
@@ -25,7 +25,7 @@ const MainTheme = createTheme({
                         variant : "login1"
                     },
                     style: {
-                        backgroundColor:'#7a3bd1',
+                        backgroundColor:'DDDDDD',
                         elevation: 10,
                         padding: 20,
                         height: "50vh",
