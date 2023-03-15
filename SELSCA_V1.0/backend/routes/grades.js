@@ -70,5 +70,34 @@ router.post("/submitGrades" , async (req,res) => {
     res.status(200).send("success")
 })
 
+router.post('/submitDates' , async (req , res) => {
+
+    console.log(req.body.fa1Date)
+    const subject = req.body[0].subject;
+    const fa1Date = req.body[0].fa1Date;
+    const fa2Date = req.body[0].fa2Date;
+    const sa1Date = req.body[0].sa1Date;
+    const fa3Date = req.body[0].fa3Date;
+    const fa4Date = req.body[0].fa4Date;
+    const sa2Date = req.body[0].sa2Date;
+
+
+
+    try {
+        await Grades.updateMany({subject: subject} , {
+            fa1Date : fa1Date,
+            fa2Date : fa2Date,
+            sa1Date : sa1Date,
+            fa3Date : fa3Date,
+            fa4Date : fa4Date,
+            sa2Date : sa2Date,
+        })
+        res.status(200).send('dates updated')
+    }
+    catch(err) {
+        console.log(err)
+    }
+})
+
 
 module.exports = router;

@@ -104,11 +104,17 @@ router.post("/registerStudent" , async(req,res) => {
                studentID : req.body.aadhar,
                subject : subject,
                fa1 : null,
+               fa1Date : null,
                fa2 : null,
+               fa2Date : null,
                sa1: null,
+               sa1Date : null,
                fa3 : null,
+               fa3Date : null,
                fa4 : null,
+               fa4Date : null,
                sa2 : null,
+               sa2Date : null,
                finalGrade : null
           })
           
