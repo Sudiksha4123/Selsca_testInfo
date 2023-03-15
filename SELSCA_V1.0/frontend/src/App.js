@@ -14,6 +14,7 @@ import GradesCenter from './components/teacher/GradesCenter.js';
 import Grades from './components/student/grades.js';
 import Studentcal from './components/student/studentcal.js';
 import Gradesview from './components/student/gradesview.js';
+import ExamDates from './components/admin/ExamDates.js';
 
 
 
@@ -64,6 +65,7 @@ function App() {
         <Route path='register' element={<Register />} />
         <Route path='userprofile' element={<UserProfile />} />
         <Route path='userData' element={<UserData />} />
+        <Route path='examDates' element={<ExamDates />} />
       </Route>
       <Route path='/teacher' element={<TeacherLayout />}>
           <Route path='userprofile' element={<UserProfile />} />
