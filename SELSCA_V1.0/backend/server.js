@@ -12,6 +12,7 @@ var registerRoute = require("./routes/register");
 var loginRoute = require('./routes/login');
 var userDataRoute = require('./routes/userdata');
 var gradesRoute = require('./routes/grades');
+var syllabusRoute = require('./routes/syllabus');
 
 // middleware
 app.use(cors());
@@ -34,7 +35,7 @@ app.use("/register" , registerRoute);
 app.use("/login" , loginRoute);
 app.use("/userData" , userDataRoute);
 app.use("/grades" , gradesRoute);
-
+app.use("/syllabus" , syllabusRoute);
 
 //starting of the server on PORT(specified in the .env file)
-app.listen(process.env.PORT , () => {console.log("server running on port : 5000")})
+app.listen(process.env.PORT , () => {console.log("server running on port : " +  process.env.PORT)})
