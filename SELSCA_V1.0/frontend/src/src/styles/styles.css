@@ -1,0 +1,20 @@
+.inputRounded .MuiOutlinedInput-root {
+    border-radius: 20px;
+    background-color: #b5b5b5;
+  }
+
+.spacedGrid {
+  display : flex;
+  justify-content: center;
+  align-items: center;
+  padding : 20px;
+}
+
+.primarySelect {
+  background-color: #b5b5b5;
+  color: #b5b5b5;
+}
+
+.unchangedText { 
+  background-color : #b5b5b5;
+}
