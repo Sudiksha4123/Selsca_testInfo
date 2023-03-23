@@ -8,29 +8,26 @@ router.post("/getGrades" , async (req,res) => {
 
     const studentIDs = req.body.studentIDs;
     const subject = req.body.subject;
-
-    console.log(studentIDs ,subject)
-
     const grades = []
 
-    for (let i=0 ; i < studentIDs.length ; i++) {
-        console.log(studentIDs[i])
-        const studentID = studentIDs[i]
+    for (let i= 0 ; i< studentIDs.length ; i++) {
 
-        const subjectGrades = await Grades.findOne({studentID : studentID , subject : subject})
-
-        if (subjectGrades) {
-            console.log('found')
-            grades.push(subjectGrades)
-        }
-        else {
-            console.log(subject , ' not found')
+        for (let j=0 ; j < subject.length ; j++) {
+            console.log(subject[j])
+            const subjectGrades = await Grades.findOne({studentID : studentIDs[i] , subject : subject[j]})
+                
+            if (subjectGrades) {
+                console.log('found')
+                grades.push(subjectGrades) 
+            }
+            else {
+                console.log(subject[j] , 'not found')
+            }        
         }
     }
 
     console.log(grades)
     res.status(200).send(grades)
-    
 
 })
 
@@ -43,6 +40,8 @@ router.post("/submitGrades" , async (req,res) => {
     
 
     console.log(studentIDs , subject , grades)
+
+    
 
     for (let key in grades) {
         try  {
