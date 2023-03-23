@@ -15,6 +15,7 @@ import Grades from './components/student/grades.js';
 import Studentcal from './components/student/studentcal.js';
 import Gradesview from './components/student/gradesview.js';
 import ExamDates from './components/admin/ExamDates.js';
+import Syllabus from './components/teacher/Syllabus.js';
 
 
 
@@ -70,6 +71,7 @@ function App() {
       <Route path='/teacher' element={<TeacherLayout />}>
           <Route path='userprofile' element={<UserProfile />} />
           <Route path='gradescenter' element={<GradesCenter />} />
+          <Route path='syllabus' element={<Syllabus />} />
       </Route>
       <Route path='/student' element={<StudentLayout />} >
       <Route path='userprofile' element={<UserProfile />} />

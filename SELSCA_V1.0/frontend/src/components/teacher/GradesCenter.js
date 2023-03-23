@@ -3,6 +3,7 @@ import axios  from 'axios';
 import { Box } from "@mui/system";
 import { Button, Container, MenuItem, Select, TextField, Typography } from "@mui/material";
 import Swal from "sweetalert2";
+import "./../../styles/styles.css";
 
 const GradesCenter = () => {
     const [studentData , setStudentData] = useState({
@@ -87,24 +88,28 @@ const GradesCenter = () => {
         })
         console.log(gradesData)
     }
- 
-
+    
+    
     return(
-  
+        
         <>
-        <Container >
+        <Box sx={{border: 3 , borderRadius: '8px', borderColor: "#333333" , maxheight: "50 vh" , overflow:"auto"}}>
+        <Container sx={{paddingTop :"10px"}}>
 
-            <Select value={subject} label="Subject"
-                            sx={{
-                                backgroundColor : "#cccccc2",
-                                color : "#242424"
-                            }}
-                            onChange={(e) => {setSubject(e.target.value)}}>
-                                <MenuItem value="English">English</MenuItem>
-                                <MenuItem value="Maths">Maths</MenuItem>
-                                <MenuItem value="Science">Science</MenuItem>
-                            </Select>
-            <table>
+            <Select value={subject} 
+            label="Subject"
+            onChange={(e) => {setSubject(e.target.value)}}>
+                <MenuItem value="English">English</MenuItem>
+                <MenuItem value="Maths">Maths</MenuItem>
+                <MenuItem value="Science">Science</MenuItem>
+                <MenuItem value="Hindi">Hindi</MenuItem>
+                <MenuItem value="Social">Social</MenuItem>
+            </Select>
+            <Button sx={{paddingLeft : '10px'}} onClick={getGrades} >get grades</Button>
+        </Container>
+
+
+            <table style={{padding : '20px'}}>
                 <tr>
                     {tests.map((item,i) => (
                         <th key={i} >
@@ -135,13 +140,17 @@ const GradesCenter = () => {
                                         return(
                                             
                                             <td>
-                                    <TextField 
-                                        type="number" 
-                                        id={j} 
-                                        sx ={{backgroundColor : "#cccccc"}}
-                                        onChange={(e) => handleChange(e,i,item)}
-                                        placeholder={mainitem[item]} 
-                                        ></TextField>
+                                                <TextField
+                                                type="number"
+                                                id={j}
+                                                label={mainitem[item]}
+                                                variant="outlined"
+                                                onChange={(e) => handleChange(e,i,item)}
+                                                InputLabelProps={{
+                                                    sx: {
+                                                    color: "#07b86c"
+                                                    }
+                                                }}/>
                                     </td>
                                     )}
                                 }
@@ -150,17 +159,13 @@ const GradesCenter = () => {
                     ))}
                 </tbody>
             </table>
-            </Container>
+            </Box>
             <Container >
-
-            <Button onClick={() => {console.log(grades[1]["fa2"])}} >show grades</Button>
-            <Button onClick={getGrades} >get grades</Button>
-            <Button onClick={submitGrades} > submit grades</Button>
-            <Button onClick={() => {console.log(grades)}} ></Button>
+            <Button sx={{paddingTop:"20px"}} onClick={submitGrades} > submit grades</Button>
             </Container>
             </>
 
-    )
+)
 
 }
 

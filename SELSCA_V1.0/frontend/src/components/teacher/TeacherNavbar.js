@@ -21,6 +21,11 @@ const TeacherNavbar = () => {
             onClick : () => {navigate('/teacher/gradescenter')
                             setisDrawerOpen(false)}
         },
+        {
+            text:"Syllabus Portal",
+            onClick : () => {navigate('/teacher/syllabus')
+                            setisDrawerOpen(false)}
+        },
         
     ]
     

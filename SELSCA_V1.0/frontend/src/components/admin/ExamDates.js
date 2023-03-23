@@ -127,7 +127,6 @@ const ExamDates = () => {
         <Button onClick={OnSubmit}>submit</Button>
         </Grid>
         </Grid>
-        <Button onClick={() => {console.log(dates)}} >show dates</Button>
         </Container>
         </>
     )

@@ -1,19 +1,10 @@
-import React from 'react';
+import React ,{ useState , useEffect} from 'react';
 import {
-AppBar,
-IconButton,
-Toolbar,
-List,
-Drawer,
-ListItem,
-ListItemText,
-Container,
-Button,
-Typography,
-Grid,
-Box,
-styled,
-} from '@mui/material';
+Button,Typography,Box, Grid} from '@mui/material';
+import axios from 'axios';
+import Capsulestyle from '../common/Capsule';
+import { spacing } from '@mui/system';
+
 
 const CircleWithFullLine = ({ upMark, downMark, isLarge, label }) => {
     const size = isLarge ? 120 : 80;
@@ -77,7 +68,9 @@ return (
 </div>
 );
 };
-const capsuleStyle = {
+
+
+const capsuleStyle= {
   position: 'relative',
   display: 'inline-block',
   borderRadius: '50px',
@@ -99,7 +92,8 @@ const lineStyle = {
   left: '25%',
   width: '75%',
   height: '2px',
-  backgroundColor: '#000'
+  backgroundColor: '#000',
+  // fontWeight: 'bold',
 };
 const topSectionStyle = {
   position: 'absolute',
@@ -128,6 +122,7 @@ const fulllineStyle = {
   width: '100%',
   height: '2px',
   backgroundColor: '#000',
+  fontWeight: 'bold',
 };
 
 const bottomSectionStyle = {
@@ -185,9 +180,11 @@ const assessmentStyle = {
   left: '1',
   transform: 'translate(-50%, -50%)',
   fontSize: '15px',
+  fontWeight: 'bold',
   textAlign: 'left',
   paddingLeft: '10px',
-  whiteSpace: 'nowrap'
+  whiteSpace: 'nowrap',
+  marginRight: '20px' // Add margin-right here
 };
 
 const dateStyle = {
@@ -196,10 +193,11 @@ const dateStyle = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   fontSize: '14px',
+  fontWeight: 'bold',
 };
 
 const date = "2023-02-27";
-const score = "max score 25";
+const score = "25";
 const assessment = "FA-1";
 const stage = 'Finals';
 
@@ -207,164 +205,88 @@ const stage = 'Finals';
 
 
 
-const App = () => {
+
+const Grades = () => {
+
+  useEffect(() => {
+    getGrades()
+  } , []) 
+
+  const [studentData , setStudentData] = useState({
+    studentIDs : [1],
+    subject : ["English","Maths","Hindi","Science"]
+  })
+  
+  const [subject , setSubject] = useState(["English","Maths","Hindi","Science"])
+  const [grades , setGrades] = useState(["fa1","fa2","sa1","fa3","fa4","sa2"])
+  
+  const getGrades = async () => {
+  
+    setStudentData({
+        studentIDs : [1],
+        subject : [subject]
+    })
+  
+    await axios.post("http://localhost:5000/grades/getGrades" , studentData)
+    .then((res) => {
+        console.log(res.data)
+        setGrades(res.data)
+    })
+    .catch(err => {
+        console.log(err)
+    }) 
+  }
+
+
 return (
+
 <div>
-{/* <Grid container>
-<Grid item xs={12} display="flex" alignItems="center" justifyContent="center">
-<Typography variant="overline" sx={{ fontSize: 40 }}>
-{' '}
-Grades dashboard{' '}
-</Typography>
-</Grid>
-</Grid> */}
-  <Box sx={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', margin: '50px 0' }}>
-    <Box sx={{ display: 'flex', alignItems: 'center', margin: '10px' }}>
-      <Typography variant="h4" component="h1" color="black">
-        Subject 1     </Typography>
-      <CircleWithFullLine upMark="90" downMark="100" label="FA 1" marginleft='40px' />
-      <CircleWithFullLine upMark="80" downMark="100" label="FA 2" />
-      <CircleWithFullLine upMark="70" downMark="100" isLarge label="SA 1"/>
-      <CircleWithFullLine upMark="92" downMark="100" label="FA 3" />
-      <CircleWithFullLine upMark="57" downMark="100" label="FA 4" />
-      <CircleWithFullLine upMark="74" downMark="100" isLarge label="SA 2"/>
-      <Button variant="contained" disableElevation style={{ marginLeft: '40px', backgroundColor: '#d9d9d9', color: 'black' }}>Final Grade B</Button>
+  
+<Box sx={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', margin: '50px 0' }}>
+  <Grid container spacing={5}>
+    {grades.map((item, i) => {
+      return (
+        <Grid item xs={12}>
+          <Box sx={{ display: 'flex', alignItems: 'center', margin: '20px', spacing:'5px', flexDirection: { xs: 'column', sm: 'row' } }}>
+            <Typography variant="h4" component="h1" color="black" display={'flex'} sx={{ width: { xs: '100%', sm: '120px' }, marginRight: { xs: '0', sm: '30px' } }}>
+              {subject[i]}
+            </Typography>
+            <CircleWithFullLine upMark={grades[i]["fa1"]} downMark="100" label="FA 1" marginleft={{ xs: '0', sm: '40px' }} />
+            <CircleWithFullLine upMark={grades[i]["fa2"]} downMark="100" label="FA 2"/>
+            <CircleWithFullLine upMark={grades[i]["sa1"]} downMark="100" label="SA 1" isLarge="SA 1" />
+            <CircleWithFullLine upMark={grades[i]["fa3"]} downMark="100" label="FA 3" />
+            <CircleWithFullLine upMark={grades[i]["fa4"]} downMark="100" label="FA 4" />
+            <CircleWithFullLine upMark={grades[i]["sa2"]} downMark="100" isLarge label="SA 2"/>
+            <Button variant="contained" disableElevation style={{ marginLeft: { xs: '0', sm: '40px' }, marginTop: { xs: '20px', sm: '0' }, backgroundColor: '#d9d9d9', color: 'black' }}>Final Grade B</Button>
+          </Box>
+        </Grid>
+      );
+    })}
+  </Grid>
+</Box>
 
 
-      </Box>
-      </Box>
-      {/* subject 2 code is from here */}
-      <Box sx={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', margin: '50px 0' }}>
-    <Box sx={{ display: 'flex', alignItems: 'center', margin: '10px' }}>
-      <Typography variant="h4" component="h1" color="black">
-        Subject 2
-      </Typography>
-      <CircleWithFullLine upMark="96" downMark="100" label="FA 1" />
-      <CircleWithFullLine upMark="82" downMark="100" label="FA 2" />
-      <CircleWithFullLine upMark="50" downMark="100" isLarge label="SA 1"/>
-      <CircleWithFullLine upMark="80" downMark="100" label="FA 3" />
-      <CircleWithFullLine upMark="65.5" downMark="100" label="FA 4" />
-      <CircleWithFullLine upMark="79" downMark="100" isLarge label="SA 2"/>
-      <Button variant="contained" disableElevation style={{ marginLeft: '40px', backgroundColor: '#d9d9d9', color: 'black' }}>Final Grade B</Button>
 
 
-      </Box>
-      </Box>
-      {/* subject 3 code is from is here  */}
-      <Box sx={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', margin: '50px 0' }}>
-    <Box sx={{ display: 'flex', alignItems: 'center', margin: '10px' }}>
-      <Typography variant="h4" component="h1" color="black">
-        Subject 3
-      </Typography>
-      <CircleWithFullLine upMark="98" downMark="100" label="FA 1" />
-      <CircleWithFullLine upMark="43" downMark="100" label="FA 2" />
-      <CircleWithFullLine upMark="35" downMark="100" isLarge label="SA 1"/>
-      <CircleWithFullLine upMark="60" downMark="100" label="FA 3" />
-      <CircleWithFullLine upMark="30" downMark="100" label="FA 4" />
-      <CircleWithFullLine upMark="65" downMark="100" isLarge label="SA 4"/>
-      <Button variant="contained" disableElevation style={{ marginLeft: '40px', backgroundColor: '#d9d9d9', color: 'black' }}>Final Grade B</Button>
-
-
-      </Box>
-      </Box>
+     
+       
       {/* below code is for capsule components */}
       <div>
+        
       <br></br>
-      <div style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
-        <Typography variant="h4" component="h1" color="black">
-          Subject 1
-        </Typography>
-        <div style={{ ...capsuleStyle, marginLeft: '40px' }}>
-          <span style={dateStyle}> Test on <br></br>{date}</span>
-          <span style={lineStyle}>{score}</span>
-          <span style={verticalLineStyle}>
-            <span style={assessmentStyle}>{assessment}</span>
-          </span>
-        </div>
-        <Button variant="contained" disableElevation style={{ marginLeft: '40px', backgroundColor: '#d9d9d9', color: 'black' }}>Final Grade B</Button>
-
-
+      <Capsulestyle date={date} score={grades[0]["fa1"]} assessment={assessment}></Capsulestyle>
+      <Capsulestyle date={date} score={grades[0]["fa1"]} assessment={assessment}></Capsulestyle>
+      <Capsulestyle date={date} score={grades[0]["fa1"]} assessment={assessment}></Capsulestyle>
+      <Capsulestyle date={date} score={grades[0]["fa1"]} assessment={assessment}></Capsulestyle>
+      <Capsulestyle date={date} score={grades[0]["fa1"]} assessment={assessment}></Capsulestyle>
+      <Capsulestyle date={date} score={grades[0]["fa1"]} assessment={assessment}></Capsulestyle>
       </div>
+
       
-      <div style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
-        <Typography variant="h4" component="h1" color="black">
-          Subject 1
-        </Typography>
-        <div style={{ ...capsuleStyle, marginLeft: '40px' }}>
-        <span style={dateStyle}> Test on <br></br>{date}</span>
-          <span style={lineStyle}>{score}</span>
-          <span style={verticalLineStyle}>
-            <span style={assessmentStyle}>FA 2</span>
-          </span>
-        </div>
-        <Button variant="contained" disableElevation style={{ marginLeft: '40px', backgroundColor: '#d9d9d9', color: 'black' }}>Final Grade B</Button>
-
-
-
-      </div>
-      <div style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
-        <Typography variant="h4" component="h1" color="black">
-          Subject 1
-        </Typography>
-        <div style={{ ...capsuleStyle, marginLeft: '40px' }}>
-        <span style={dateStyle}> Test on <br></br>{date}</span>
-          <span style={lineStyle}>{score}</span>
-          <span style={verticalLineStyle}>
-            <span style={assessmentStyle}>SA 1</span>
-          </span>
-        </div>
-        <Button variant="contained" disableElevation style={{ marginLeft: '40px', backgroundColor: '#d9d9d9', color: 'black' }}>Final Grade B</Button>
-
-
-      </div>
-      <div style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
-        <Typography variant="h4" component="h1" color="black">
-          Subject 1
-        </Typography>
-        <div style={{ ...capsuleStyle, marginLeft: '40px' }}>
-        <span style={dateStyle}> Test on <br></br>{date}</span>
-          <span style={lineStyle}>{score}</span>
-          <span style={verticalLineStyle}>
-            <span style={assessmentStyle}>FA 3</span>
-          </span>
-        </div>
-        <Button variant="contained" disableElevation style={{ marginLeft: '40px', backgroundColor: '#d9d9d9', color: 'black' }}>Final Grade B</Button>
-
-
-      </div>
-      <div style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
-        <Typography variant="h4" component="h1" color="black">
-          Subject 1
-        </Typography>
-        <div style={{ ...capsuleStyle, marginLeft: '40px' }}>
-        <span style={dateStyle}> Test on <br></br>{date}</span>
-          <span style={lineStyle}>{score}</span>
-          <span style={verticalLineStyle}>
-            <span style={assessmentStyle}>FA 4</span>
-          </span>
-        </div>
-        <Button variant="contained" disableElevation style={{ marginLeft: '40px', backgroundColor: '#d9d9d9', color: 'black' }}>Final Grade B</Button>
-
-
-      </div>
-      <div style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
-        <Typography variant="h4" component="h1" color="black">
-          Subject 1
-        </Typography>
-        <div style={{ ...capsuleStyle, marginLeft: '40px' }}>
-        <span style={dateStyle}> Test on <br></br>{date}</span>
-          <span style={lineStyle}>{score}</span>
-          <span style={verticalLineStyle}> 
-            <span style={assessmentStyle}>SA 2</span>
-          </span>
-        </div>
-        <Button variant="contained" disableElevation style={{ marginLeft: '40px', backgroundColor: '#d9d9d9', color: 'black' }}>Final Grade B</Button>
-        </div>
-      </div>
       {/* the belw code is for 3 color components */}
       <div style={{ ...capsuleStyle, marginLeft: '40px' }}>
       <span style={dateStyle}> Test on <br></br>{date}</span>
-          <span style={lineStyle}>{score}</span>
+      <span style={lineStyle}>Max Score Possible<br></br>{score}</span>
           <span style={verticalLineStyle}>
             <span style={assessmentStyle}>{assessment}</span>
           </span>
@@ -372,7 +294,7 @@ Grades dashboard{' '}
         <div style={{ ...capsuleStyle, marginLeft: '40px', fontFamily: 'Roboto' }}>
           <div style={topSectionStyle} />
           <span style={dateStyle}> Test on <br></br>{date}</span>
-          <span style={lineStyle}>{score}</span>
+          <span style={lineStyle}>Max Score Possible<br></br>{score}</span>
           <span style={verticalLineStyle}>
             <span style={assessmentStyle}>{assessment}</span>
           </span>
@@ -380,7 +302,7 @@ Grades dashboard{' '}
         <div style={{ ...capsuleStyle, marginLeft: '40px', fontFamily: 'Roboto' }}>
           <div style={topSectionStyleforAbsent} />
           <span style={dateStyle}><strong style={{fontWeight: 'bold'}}>ABSENT</strong></span>
-          <span style={lineStyle}>{score}</span>
+          <span style={lineStyle}>Max Score Possible<br></br>{score}</span>
           <span style={verticalLineStyle}>
             <span style={assessmentStyle}>{assessment}</span>
           </span>
@@ -406,7 +328,7 @@ Grades dashboard{' '}
         <div style={{ ...capsuleStyle, marginLeft: '40px', fontFamily: 'Roboto' }}>
           <div style={ bottomSectionStyleforGrade} />
           <span style={dateStyle}><strong style={{fontWeight: 'bold'}}>{stage}</strong></span>
-          <span style={fulllineStyle}><strong style={{fontWeight: 'bold'}}>Grades Pending!</strong></span>
+          <span style={fulllineStyle}><strong style={{fontWeight: 'bold'}}>Grades Pending!!</strong></span>
         </div>
       </div>
       
@@ -417,5 +339,6 @@ Grades dashboard{' '}
         </div>
       
 )
+
 };
-export default App;
+export default Grades;

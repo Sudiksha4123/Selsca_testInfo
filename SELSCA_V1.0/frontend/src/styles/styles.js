@@ -4,7 +4,7 @@ const MainTheme = createTheme({
     palette: {
         type: 'dark',
         primary: {
-          main: '#6C00FF',
+          main: '#1b0169',
         },
         secondary: {
           main: '#2DCDDF',
@@ -15,6 +15,7 @@ const MainTheme = createTheme({
         },
         text: {
           primary: '#242424',
+          
         },
       },
       components : {
