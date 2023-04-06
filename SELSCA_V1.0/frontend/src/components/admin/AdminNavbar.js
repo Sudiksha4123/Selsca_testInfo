@@ -31,6 +31,11 @@ const AdminNavbar = () => {
             text:"Exam Dates",
             onClick: () => {navigate('/admin/examDates')
                             setisDrawerOpen(false)}
+        },
+        {
+            text:"Grades Due Dates",
+            onClick: () => {navigate('/admin/gradesDueDates')
+                            setisDrawerOpen(false)}
         }
         
     ]

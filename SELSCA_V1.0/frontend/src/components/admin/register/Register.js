@@ -170,16 +170,20 @@ const Register = () => {
                     <Typography variant="Overline" sx={{fontSize:50 , color : "#242424"}} >Registration Portal</Typography>
                 </Grid>
                 <Grid item xs={6} display = 'flex' alignItems={"center"} justifyContent="right" padding={3}>
-                    <Typography variant="overline"
-                    sx ={{paddingRight:3,
-                    color : "#242424"}}>Select Role being registered :</Typography>
+                    <Typography variant="body1"
+                    sx ={{paddingRight:3,}}>Select Role being registered :</Typography>
                 </Grid>
                 <Grid item xs ={6}  display="flex" alignItems='center' justifyContent='left' padding={3}>
-                    {/*  */}
-                    <Select value={role} label="Role"
+                    <Select value={role} label="Role"  
                     sx={{
-                        backgroundColor : "#a3a2a2",
-                        color : "#242424"
+                    width: 100,
+                    height: 60,
+                    marginRight: 15,
+                    border: "1px solid darkgrey",
+                    color: "#242424",
+                    "& .MuiSvgIcon-root": {
+                        color: "black",
+                    },
                     }}
                     onChange={(e) => {setRole(e.target.value)}}>
                         <MenuItem value="admin">Admin</MenuItem>
@@ -193,45 +197,68 @@ const Register = () => {
                 <Grid container spacing={2} sx={{paddingTop:5}}>
                     <Grid item xs={6} display="flex" justifyContent={'right'} alignItems="center">
                         <Typography 
-                        variant="register1" 
+                        variant="body1" 
                         sx={{paddingRight:3,
                         color : "#242424"}}
                         >Name :</Typography>
                     </Grid>
                     <Grid item xs ={6} >
-                        <TextField className="inputRounded" onChange={(e) => {setName(e.target.value)}}> </TextField>
+                        <TextField
+                        sx={{
+                            "& .MuiInputBase-root": {
+                                color: 'text.secondary'
+                            }
+                        }}
+                         onChange={(e) => {setName(e.target.value)}}> </TextField>
                     </Grid>
                     <Grid item xs={6} display="flex" justifyContent={'right'} alignItems="center">
                         <Typography 
-                        variant="register1" 
+                        variant="body1" 
                         sx={{paddingRight:3,
                             color : "#242424"}} 
                     >Email :</Typography>
                     </Grid>
                     
                     <Grid item xs ={6}>
-                        <TextField className="inputRounded" onChange={(e) => {setEmail(e.target.value)}}> </TextField>
+                        <TextField 
+                        sx={{
+                            "& .MuiInputBase-root": {
+                                color: 'text.secondary'
+                            }
+                        }}
+                         onChange={(e) => {setEmail(e.target.value)}}> </TextField>
                     </Grid>
                     <Grid item xs={6} display="flex" justifyContent={'right'} alignItems="center">
                         <Typography 
-                        variant="register1" 
+                        variant="body1" 
                         sx={{paddingRight:3,
                             color : "#242424"}} 
                         >Password :</Typography>
                     </Grid>
                     
                     <Grid item xs ={6}>
-                        <TextField type='password' className="inputRounded" onChange={(e) => {setPassword(e.target.value)}}> </TextField>
+                        <TextField type='password' 
+                        sx={{
+                            "& .MuiInputBase-root": {
+                                color: 'text.secondary'
+                            }
+                        }}
+                         onChange={(e) => {setPassword(e.target.value)}}> </TextField>
                     </Grid>
                     <Grid item xs={6} display="flex" justifyContent={'right'} alignItems="center">
                         <Typography 
-                        variant="register1" 
+                        variant="body1" 
                         sx={{paddingRight:3,
                             color : "#242424"}}
                         >Aadhar :</Typography>
                     </Grid>
                     <Grid item xs={6}>
-                        <TextField className="inputRounded" onChange={(e) => {setAadhar(e.target.value)}} ></TextField>
+                        <TextField sx={{
+                            "& .MuiInputBase-root": {
+                                color: 'text.secondary'
+                            }
+                        }}
+                         onChange={(e) => {setAadhar(e.target.value)}} ></TextField>
                     </Grid>
 
                         {/* selectively rendering the neccessary inputs depending on the role (teacher or student) */}
@@ -240,13 +267,18 @@ const Register = () => {
                         <>
                         <Grid item xs ={6} display="flex" justifyContent={'right'} alignItems="center">
                             <Typography 
-                            variant="register1" 
+                            variant="body1" 
                             sx={{paddingRight:3,
                                 color : "#242424"}} 
                             >Date of Birth :</Typography>
                         </Grid>
                         <Grid item xs={6}>
-                            <TextField type="date" className="inputRounded" onChange={(e) => {setDob(e.target.value)}}> </TextField>
+                            <TextField type="date" sx={{
+                            "& .MuiInputBase-root": {
+                                color: 'text.secondary'
+                            }
+                        }}
+                         onChange={(e) => {setDob(e.target.value)}}> </TextField>
                         </Grid>
                         </>
                     }
@@ -255,28 +287,40 @@ const Register = () => {
                         <>
                         <Grid item xs ={6} display="flex" justifyContent={'right'} alignItems="center">
                             <Typography 
-                            variant="register1" 
+                            variant="body1" 
                             sx={{paddingRight:3,
                                 color : "#242424"}} 
                             >Date of Birth :</Typography>
                         </Grid>
                         <Grid item xs={6}>
-                            <TextField type="date" className="inputRounded" onChange={(e) => {setDob(e.target.value)}}> </TextField>
+                            <TextField type="date" 
+                            sx={{
+                                "& .MuiInputBase-root": {
+                                    color: 'text.secondary'
+                                }
+                            }}
+                             onChange={(e) => {setDob(e.target.value)}}> </TextField>
                         </Grid>
                         <Grid item xs ={6} display="flex" justifyContent={'right'} alignItems="center">
                             <Typography 
-                            variant="register1" 
+                            variant="body1" 
                             sx={{paddingRight:3,
                                 color : "#242424"}} 
                             >Class :</Typography>
                         </Grid>
                         <Grid item xs={6}>
-                            <TextField className="inputRounded" onChange={(e) => {setClassno(e.target.value)}}> </TextField>
+                            <TextField 
+                            sx={{
+                                "& .MuiInputBase-root": {
+                                    color: 'text.secondary'
+                                }
+                            }}
+                             onChange={(e) => {setClassno(e.target.value)}}> </TextField>
                         </Grid>
                         </>
                     }
                     <Grid item xs={12} display="flex" justifyContent={"center"} alignItems="center" >
-                        <Button variant="contained" onClick={handleSubmit}>Submit</Button>
+                        <Button variant="outlined" onClick={handleSubmit}>Submit</Button>
                     </Grid>
                 </Grid>
                 </Container>

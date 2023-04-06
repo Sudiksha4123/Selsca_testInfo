@@ -87,7 +87,7 @@ const Syllabus = () => {
                 </Grid>
                 <Grid item xs={6} display="flex" justifyContent={'right'} alignItems="center">
                         <Typography 
-                        variant="register1" 
+                        variant="body1" 
                         sx={{paddingRight:3,
                         color : "#242424"}}
                         >Select Subject :</Typography>
@@ -109,7 +109,7 @@ const Syllabus = () => {
                 </Grid>
                     <Grid item xs={6} display="flex" justifyContent={'right'} alignItems="center">
                         <Typography 
-                        variant="register1" 
+                        variant="body1" 
                         sx={{paddingRight:3,
                         color : "#242424"}}
                         >Select test :</Typography>
@@ -132,14 +132,20 @@ const Syllabus = () => {
                 </Grid>
                     <Grid item xs={6} display="flex" justifyContent={'right'} alignItems="center">
                         <Typography 
-                        variant="register1" 
+                        variant="body1" 
                         sx={{paddingRight:3,
                             color : "#242424"}} 
                     >Sylabus :</Typography>
                     </Grid>
                     
                     <Grid item xs ={6} display="flex" alignItems='center' justifyContent='left' padding={2}>
-                        <TextField className="inputRounded" onChange={(e) => {setSyllabus(e.target.value)}}> </TextField>
+                        <TextField 
+                        sx={{
+                            "& .MuiInputBase-root": {
+                                color: 'text.secondary'
+                            }
+                        }}
+                         onChange={(e) => {setSyllabus(e.target.value)}}> </TextField>
                     </Grid>
                     <Grid item xs={12} 
                     sx={{

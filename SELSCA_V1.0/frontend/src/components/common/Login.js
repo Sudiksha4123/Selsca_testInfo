@@ -94,16 +94,17 @@ const Login = () => {
     return(
         <div>
             <Grid container>
-                <Paper variant="login1">
+                <Paper variant="login1" >
                     <Container align='center'>
+
                     <Avatar sx={{ width: 56, height: 56 }}><AccountCircleIcon /></Avatar>
-                    <Typography variant="overline" sx={{fontSize:24}}>Sign in</Typography>
+                    <Typography className="loginTypography" variant="overline" sx={{fontSize:24}}>Sign in</Typography>
                     <Grid item  xs={6} >
-                        <Typography variant="overline" >Role :</Typography>
+                        <Typography className="loginTypography" variant="overline" >Role :</Typography>
                     </Grid>
                         <Grid item xs={6} padding={3}>
-                            <Select value={role} label="Role"
-                            className="inputRounded"
+                            <Select  value={role} label="Role" text="secondary"
+                            // className="inputRounded"
                              onChange={(e) => {setRole(e.target.value)}}>
                                 <MenuItem value="admin">Admin</MenuItem>
                                 <MenuItem value="teacher">Teacher</MenuItem>

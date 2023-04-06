@@ -12,7 +12,7 @@ const GradesCenter = () => {
     })
     const [grades, setGrades] = useState([])
     const [subject, setSubject] = useState("English")
-    const [tests , setTests] = useState(["Student Name" ,"FA1" , "FA2" , "SA1" , "FA3" , "FA4" , "SA2" , "Final Grade"])               
+    const [tests , setTests] = useState(["Student Name" ,"fa1" , "fa2" , "sa1" , "fa3" , "fa4" , "sa2" , "Final Grade"])               
     const [itemKeys , setItemKeys] = useState(["studentName","fa1","fa2","sa1","fa3","fa4","sa2","finalGrade"])
 
     useEffect(() => {

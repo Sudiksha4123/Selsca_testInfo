@@ -1,7 +1,4 @@
-.inputRounded .MuiOutlinedInput-root {
-    border-radius: 20px;
-    background-color: #b5b5b5;
-  }
+
 
 .spacedGrid {
   display : flex;
@@ -18,3 +15,13 @@
 .unchangedText { 
   background-color : #b5b5b5;
 }
+
+.loginTypography {
+  color: #FDFDFF;
+}
+
+.loginSelect {
+  color : #FDFDFF;
+}
+
+.darkTextField {}
