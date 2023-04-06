@@ -99,4 +99,41 @@ router.post('/submitDates' , async (req , res) => {
 })
 
 
+router.post("/getTestDates", async (req, res) => {
+  const subject = req.body.subject;
+  console.log(subject)
+
+  try {
+    const testDates = await Grades.aggregate([
+      { $match: { subject: subject } },
+      {
+        $group: {
+          _id: "$subject",
+          fa1Date: { $first: "$fa1Date" },
+          fa2Date: { $first: "$fa2Date" },
+          sa1Date: { $first: "$sa1Date" },
+          fa3Date: { $first: "$fa3Date" },
+          fa4Date: { $first: "$fa4Date" },
+          sa2Date: { $first: "$sa2Date" },
+        },
+      },
+    ]);
+
+    const datesArray = testDates.map(test => ({
+      fa1Date: test.fa1Date,
+      fa2Date: test.fa2Date,
+      sa1Date: test.sa1Date,
+      fa3Date: test.fa3Date,
+      fa4Date: test.fa4Date,
+      sa2Date: test.sa2Date
+    }));
+
+    res.status(200).json(datesArray);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "An error occurred while fetching test dates." });
+  }
+});
+
+
 module.exports = router;

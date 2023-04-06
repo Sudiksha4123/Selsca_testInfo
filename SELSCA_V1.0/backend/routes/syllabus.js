@@ -35,10 +35,22 @@ router.post('/submitSyllabus' , async (req,res) => {
             console.log(err)
         }
     }
+})
 
+router.get('/getSyllabus' , async (req,res) => {
     
+    const subject = req.body.subject;
+    const testName = req.body.testName;
 
-    // res.status(200).send('Syllabus updated successfully!')
+    const syllabus = await Syllabus.findOne({subject : subject , testName : testName})
+
+    if (!syllabus) {
+        console.log("syllabus does not exist")
+        res.status(404).send('please check parameters , syllabus does not exist with given parameters')
+    }
+    else {
+        res.status(200).send(syllabus)
+    }
 })
 
 module.exports = router;
