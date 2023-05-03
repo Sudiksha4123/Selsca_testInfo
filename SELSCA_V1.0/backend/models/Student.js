@@ -15,7 +15,7 @@ const StudentSchema = new Schema({
         type: String,
         required: true
     },
-    aadhar : {
+    studentID : {
         type : String,
         required : true
     },

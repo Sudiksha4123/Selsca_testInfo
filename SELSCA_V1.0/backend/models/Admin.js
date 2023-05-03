@@ -14,7 +14,7 @@ const AdminSchema = new Schema({
         type : String,
         required : true
     },
-    aadhar : {
+    studentID : {
         type : String,
     },
     address : {

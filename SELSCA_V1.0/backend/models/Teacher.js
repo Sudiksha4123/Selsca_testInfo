@@ -15,7 +15,7 @@ const TeacherSchema = new Schema({
         type: String,
         required: true
     },
-    aadhar: {
+    studentID: {
         type : String,
     },
     DOB :{
