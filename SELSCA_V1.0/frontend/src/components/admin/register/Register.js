@@ -1,4 +1,4 @@
-import { Typography , Grid , Container,  Select , MenuItem  , TextField , Button} from "@mui/material";
+import { Typography , Grid , Container,  Select , MenuItem  , TextField , Button, Menu} from "@mui/material";
 import React, { useState } from "react";
 import Swal from 'sweetalert2';
 import axios from 'axios';
@@ -11,7 +11,7 @@ const Register = () => {
     const [email , setEmail] = useState()
     const [name , setName] = useState("");
     const [password , setPassword] = useState("");
-    const [aadhar , setAadhar] = useState("");
+    const [studentID , setstudentID] = useState("");
     const [classno , setClassno] = useState("");
     const [dob , setDob] = useState("");
 
@@ -19,7 +19,10 @@ const Register = () => {
     //giving an alert if not given
     const CheckInput = () => {
 
-        if (name === "") {
+        if (role !== "class") {
+
+            
+            if (name === "") {
             Swal.fire({
                 icon: 'warning',
                 text: 'Please enter name'
@@ -38,10 +41,10 @@ const Register = () => {
                 text : 'Please enter password'
             })
         }
-        else if (aadhar === "") {
+        else if (studentID === "") {
             Swal.fire({
                 icon : 'warning',
-                text : 'Please enter Aadhar no.'
+                text : 'Please enter studentID no.'
             })
         }
         else if (classno === "" && role ==='student'){
@@ -53,6 +56,18 @@ const Register = () => {
         else {
             return true
         }
+    }
+    else if (role ==="class") {
+        if (name === "") {
+            Swal.fire({
+                icon: 'warning',
+                text: 'Please enter name'
+            })
+        }
+        else {
+            return true
+        }
+    }
     }
 
     //clears all state variables on successful registration 
@@ -75,7 +90,7 @@ const Register = () => {
                 name : name,
                 email : email,
                 password : password,
-                aadhar: aadhar,
+                studentID: studentID,
                 class : classno,
                 DOB : Date(dob)
             }
@@ -144,12 +159,48 @@ const Register = () => {
                 })
             }
             else if (role ==='student') {
-                axios.post("http://localhost:5000/register/registerStudent" , newUser)
+                const studentsData = {
+                    students: [
+                        {
+                            name: name,
+                            email: email,
+                            password: password,
+                            studentID: studentID,
+                            className: classno,
+                            DOB: Date(dob)
+                        }
+                    ]
+                }
+
+
+                axios.post("http://localhost:5000/register/registerStudent" , studentsData)
                 .then(res => {
                     Swal.close()
                     Swal.fire({
                         icon : 'success',
                         title : 'Student successfully registered'
+                    })
+                    ClearForm()
+                })
+                .catch(err => {
+                    console.log(err)
+                    Swal.fire({
+                        icon : 'error',
+                        title : err.response.data.message
+                    })
+                })
+            }
+            else if (role === "class") {
+                const newClass = {
+                    name : name
+                }
+
+                axios.post("http://localhost:5000/register/registerClass" , newClass)
+                .then(res => {
+                    Swal.close()
+                    Swal.fire({
+                        icon : 'success',
+                        title : 'class successfully registered'
                     })
                     ClearForm()
                 })
@@ -190,6 +241,7 @@ const Register = () => {
                         <MenuItem value="headmaster">Headmaster</MenuItem>
                         <MenuItem value="teacher">Teacher</MenuItem>
                         <MenuItem value="student">Student</MenuItem>
+                        <MenuItem value="class">Class</MenuItem>
                     </Select>
                 </Grid>
                 </Grid>
@@ -199,8 +251,8 @@ const Register = () => {
                         <Typography 
                         variant="body1" 
                         sx={{paddingRight:3,
-                        color : "#242424"}}
-                        >Name :</Typography>
+                            color : "#242424"}}
+                            >Name :</Typography>
                     </Grid>
                     <Grid item xs ={6} >
                         <TextField
@@ -209,14 +261,17 @@ const Register = () => {
                                 color: 'text.secondary'
                             }
                         }}
-                         onChange={(e) => {setName(e.target.value)}}> </TextField>
+                        onChange={(e) => {setName(e.target.value)}}> </TextField>
                     </Grid>
-                    <Grid item xs={6} display="flex" justifyContent={'right'} alignItems="center">
+                    {
+                        (role !== "class") && 
+                        <>
+                        <Grid item xs={6} display="flex" justifyContent={'right'} alignItems="center">
                         <Typography 
                         variant="body1" 
                         sx={{paddingRight:3,
                             color : "#242424"}} 
-                    >Email :</Typography>
+                            >Email :</Typography>
                     </Grid>
                     
                     <Grid item xs ={6}>
@@ -226,14 +281,14 @@ const Register = () => {
                                 color: 'text.secondary'
                             }
                         }}
-                         onChange={(e) => {setEmail(e.target.value)}}> </TextField>
+                        onChange={(e) => {setEmail(e.target.value)}}> </TextField>
                     </Grid>
                     <Grid item xs={6} display="flex" justifyContent={'right'} alignItems="center">
                         <Typography 
                         variant="body1" 
                         sx={{paddingRight:3,
                             color : "#242424"}} 
-                        >Password :</Typography>
+                            >Password :</Typography>
                     </Grid>
                     
                     <Grid item xs ={6}>
@@ -243,14 +298,14 @@ const Register = () => {
                                 color: 'text.secondary'
                             }
                         }}
-                         onChange={(e) => {setPassword(e.target.value)}}> </TextField>
+                        onChange={(e) => {setPassword(e.target.value)}}> </TextField>
                     </Grid>
                     <Grid item xs={6} display="flex" justifyContent={'right'} alignItems="center">
                         <Typography 
                         variant="body1" 
                         sx={{paddingRight:3,
                             color : "#242424"}}
-                        >Aadhar :</Typography>
+                            >studentID :</Typography>
                     </Grid>
                     <Grid item xs={6}>
                         <TextField sx={{
@@ -258,18 +313,20 @@ const Register = () => {
                                 color: 'text.secondary'
                             }
                         }}
-                         onChange={(e) => {setAadhar(e.target.value)}} ></TextField>
+                        onChange={(e) => {setstudentID(e.target.value)}} ></TextField>
                     </Grid>
+                    </>
+                    }
 
                         {/* selectively rendering the neccessary inputs depending on the role (teacher or student) */}
                     {
-                         (role=== "teacher" || role=== "headmaster") &&
+                        (role=== "teacher" || role=== "headmaster") &&
                         <>
                         <Grid item xs ={6} display="flex" justifyContent={'right'} alignItems="center">
-                            <Typography 
-                            variant="body1" 
-                            sx={{paddingRight:3,
-                                color : "#242424"}} 
+                        <Typography 
+                        variant="body1" 
+                        sx={{paddingRight:3,
+                            color : "#242424"}} 
                             >Date of Birth :</Typography>
                         </Grid>
                         <Grid item xs={6}>

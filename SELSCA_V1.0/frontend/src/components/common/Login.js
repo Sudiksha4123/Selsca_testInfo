@@ -1,11 +1,12 @@
 import React, { useState  } from "react";
-import { Typography , Paper, Grid , Avatar, TextField , Button, Select, MenuItem } from "@mui/material";
+import { Typography , Paper, Grid , Avatar, TextField , Button, Select, MenuItem  , Box} from "@mui/material";
 import { Container } from "@mui/system";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Swal from 'sweetalert2';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./../../styles/styles.css";
+import RCTSIcon from "../../misc/icons/RCTS - Logo - Transparent 1.png";
 
 
 const Login = () => {
@@ -93,39 +94,49 @@ const Login = () => {
 
     return(
         <div>
-            <Grid container>
-                <Paper variant="login1" >
-                    <Container align='center'>
-
-                    <Avatar sx={{ width: 56, height: 56 }}><AccountCircleIcon /></Avatar>
-                    <Typography className="loginTypography" variant="overline" sx={{fontSize:24}}>Sign in</Typography>
-                    <Grid item  xs={6} >
-                        <Typography className="loginTypography" variant="overline" >Role :</Typography>
-                    </Grid>
-                        <Grid item xs={6} padding={3}>
-                            <Select  value={role} label="Role" text="secondary"
-                            // className="inputRounded"
-                             onChange={(e) => {setRole(e.target.value)}}>
-                                <MenuItem value="admin">Admin</MenuItem>
-                                <MenuItem value="teacher">Teacher</MenuItem>
-                                <MenuItem value="student">Student</MenuItem>
-                            </Select>
-                        </Grid>
-                        <Grid item xs={12} padding={3}>
-                            <TextField label='Email' placeholder="Enter Email"
-                            className="inputRounded" onChange={(e) => {setEmail(e.target.value)}}></TextField>
-                        </Grid>
-                        <Grid item xs={12} padding ={3}>
-                            <TextField type='password' label='Password' placeholder="Enter Password" 
-                            className="inputRounded" onChange={(e) => {setPassword(e.target.value)}}></TextField>
-                        </Grid>
-                        <Grid item xs={12} padding ={3}>
-                            <Button variant='contained' onClick={handleSubmit}>Login</Button>
-                        </Grid>
-                    </Container>    
-                </Paper>
+        <Container>
+          <Grid container justifyContent="center" alignItems="center" spacing={3}>
+            <Grid item xs={6} align="center">
+                <Box style={{padding: 100}}>
+              <img src={RCTSIcon} style={{ width: "150%"}} alt="RCTS Icon" />
+                </Box>
             </Grid>
-        </div>
+            <Grid item xs={6} align="center">
+            <Container sx={{paddingTop : "100px" , paddingLeft : "100px"}} >
+              <Paper variant="login1" >
+                <Container align="center">
+                        <Avatar sx={{ width: 56, height: 56 }}><AccountCircleIcon /></Avatar>
+                        <Typography className="loginTypography" variant="overline" sx={{fontSize:24}}>Sign in</Typography>
+                        <Grid item  xs={6} >
+                            <Typography className="loginTypography" variant="overline" >Role :</Typography>
+                        </Grid>
+                            <Grid item xs={6} padding={3}>
+                                <Select  value={role} label="Role" text="secondary"
+                                // className="inputRounded"
+                                onChange={(e) => {setRole(e.target.value)}}>
+                                    <MenuItem value="admin">Admin</MenuItem>
+                                    <MenuItem value="teacher">Teacher</MenuItem>
+                                    <MenuItem value="student">Student</MenuItem>
+                                </Select>
+                            </Grid>
+                            <Grid item xs={12} padding={3}>
+                                <TextField label='Email' placeholder="Enter Email"
+                                className="inputRounded" onChange={(e) => {setEmail(e.target.value)}}></TextField>
+                            </Grid>
+                            <Grid item xs={12} padding ={3}>
+                                <TextField type='password' label='Password' placeholder="Enter Password" 
+                                className="inputRounded" onChange={(e) => {setPassword(e.target.value)}}></TextField>
+                            </Grid>
+                            <Grid item xs={12} padding ={3}>
+                                <Button variant='contained' onClick={handleSubmit}>Login</Button>
+                            </Grid>
+                </Container>
+              </Paper>
+            </Container>
+            </Grid>
+          </Grid>
+        </Container>
+      </div>
     )
 }
 

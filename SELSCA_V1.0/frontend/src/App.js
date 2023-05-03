@@ -17,6 +17,7 @@ import Gradesview from './components/student/gradesview.js';
 import ExamDates from './components/admin/ExamDates.js';
 import Syllabus from './components/teacher/Syllabus.js';
 import GradesDueDateForm from './components/admin/GradesDueDates.js';
+import Attendance from './components/teacher/Attendance.js';
 
 
 
@@ -26,7 +27,7 @@ function App() {
     return (
       <Box>
         <AdminNavbar />
-        <Container>
+        <Container sx={{ paddingLeft : 240}}>
           <Outlet />
         </Container> 
       </Box>
@@ -74,6 +75,7 @@ function App() {
           <Route path='userprofile' element={<UserProfile />} />
           <Route path='gradescenter' element={<GradesCenter />} />
           <Route path='syllabus' element={<Syllabus />} />
+          <Route path='attendance' element={<Attendance />} />
       </Route>
       <Route path='/student' element={<StudentLayout />} >
       <Route path='userprofile' element={<UserProfile />} />
