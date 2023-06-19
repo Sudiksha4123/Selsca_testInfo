@@ -83,63 +83,6 @@ router.post('/registerHeadmaster' , async (req,res) => {
 })
 
 
-
-// router.post("/registerStudent", async (req, res) => {
-//      const students = req.body.students;
-//      const subjects = ["English", "Maths", "Science", "Hindi", "Social"];
-//      const results = [];
-
-//      console.log("Incoming students data:", req.body.students);
-   
-//      for (const studentData of students) {
-//           const salt = await bcrypt.genSalt(10);
-//           const hashedPassword = await bcrypt.hash(studentData.password, salt);
-   
-//           console.log("Class Name", studentData.class)
-   
-//           const classObj = await Class.findOne({ name: studentData.class });
-   
-//           if (!classObj) {
-//              res.status(404).json({ message: "Class not found" });
-//              return;
-//            }
-      
-//           const student = new Student({
-//             name: studentData.name,
-//             email: studentData.email,
-//             studentID: studentData.studentID,
-//             password: hashedPassword,
-//             class: classObj._id,
-//             DOB: studentData.DOB,
-//           });
-   
-//        try {
-//          // Save the new student
-//          const savedStudent = await student.save();
-//          results.push(savedStudent);
-   
-//          // Create a new Grades document for each subject
-//          for (let subject of subjects) {
-//            const newGrades = new Grades({
-//              studentName: studentData.name,
-//              studentID: studentData.studentID,
-//              subject: subject,
-//              tests: [], // Empty tests array
-//              finalGrade: null,
-//            });
-   
-//            await newGrades.save();
-//          }
-//        } catch (err) {
-//          console.log(err);
-//          res.status(400).send(err);
-//          return;
-//        }
-//      }
-   
-//      res.status(200).send(results);
-//    });
-
 router.post("/registerStudent", async (req, res) => {
      const students = req.body.students;
      const subjects = ["English", "Maths", "Science", "Hindi", "Social"];
@@ -292,30 +235,41 @@ router.post('/registerTest', async (req, res) => {
              testName: testName,
              class: className,
              maxScore: maxScore,
-             subject: subject[0],
+             subject: subject,
              date: date
          });
          await newTestInfo.save();
- 
+
+         console.log(newTestInfo)
+
          // Update the Class with the new test name
          await Class.updateOne(
-             { name: className },
-             { $push: { tests: testName } }
-         );
- 
-         // Add the test to the Grades collection for each student
-         const classData = await Class.findOne({ name: className }).populate('students');
-         const students = classData.students;
- 
-         for (const student of students) {
-             // Update the Grades collection with the specified subject and student ID
-             console.log(student)
-             await Grades.updateOne(
-                 { studentID: student, subject: subject[0] },
-                 { $push: { tests: { testName: testName, score: null } } }
-             );
-         }
- 
+              { name: className },
+              { $push: { tests: testName } }
+              );
+              
+              // Add the test to the Grades collection for each student
+              const classData = await Class.findOne({ name: className }).populate('students');
+              const students = classData.students;
+
+              console.log(students)
+              
+              for (const student of students) {
+                   // Update the Grades collection with the specified subject and student ID
+                   console.log(student)
+                   try {
+                    await Grades.updateOne(
+                        { studentID: student, subject: subject },
+                        { $push: { tests: { testName: testName, score: null } } }
+                    );
+                } catch (error) {
+                    console.error("Error updating grades:", error);
+                    throw error; // Or handle the error as appropriate for your application
+                }
+                
+                    }
+                    
+                    console.log('test added')
          res.status(200).json({ message: 'Test added successfully.' });
      } catch (err) {
          console.error(err.message);

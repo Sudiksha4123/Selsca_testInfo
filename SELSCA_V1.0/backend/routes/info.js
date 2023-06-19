@@ -5,26 +5,9 @@ const router = express.Router();
 const GradesDueDate = require('../models/GradesDueDates');
 const Attendance = require('../models/Attendance');
 const Class = require("../models/Class");
+const TestInfo = require('../models/TestInfo');
 
 
-// router.post('/getGradesDueDates', async (req, res) => {
-//     const subject = req.body.subject;
-  
-//     console.log(subject)
-//     try {
-//       const gradesDueDates = await GradesDueDate.find({ subject: subject });
-//       console.log(gradesDueDates)
-  
-//       if (!gradesDueDates || gradesDueDates.length === 0) {
-//         console.log('grades due date not found')
-//         return res.status(404).json({ message: "Grades due date not found" });
-//       }
-//       return res.status(200).json(gradesDueDates);
-//     } catch (err) {
-//       console.log(err);
-//       return res.status(500).json({ message: "Internal server error" })
-//     }
-//   })
 router.post('/getTestGrades', async (req, res) => {
   const { class: classId, studentID, subject } = req.body;
 
@@ -53,28 +36,27 @@ router.post('/getTestGrades', async (req, res) => {
 });
 
 
-router.post('/submitGradesDueDates' , async (req,res) => {
+// router.post('/submitGradesDueDates' , async (req,res) => {
 
-    const {testName , subject, date} = req.body;
+//     const {testName  , classNo, subject, date} = req.body;
 
-    try {
-        let gradesDueDate = await GradesDueDate.findOne({testName : testName, subject : subject});
+//     try {
+//       var testInfo = await TestInfo.findOne({testName : testName  , subject : subject })
+//     }
+//     catch (err) {
+//       console.log(err)
+//       res.status(200).send(err)
+//     }
 
-        if (!gradesDueDate) {
-            gradesDueDate = new GradesDueDate({testName : testName , subject : subject , date : date}); 
-        } else {
-            gradesDueDate.date = date;
-        }
+//     if (testInfo) {
+//       await 
+//     }
 
-        await gradesDueDate.save();
-        console.log('grades registered')
-        return res.status(201).json({ message : "Grades due date registered successfully"})
-    }
-    catch (err) {
-        console.log(err);
-        return res.status(500).json({message : "Internal server error"})
-    }
-})
+//     res.send(testInfo)
+
+
+    
+// })
 
 
 router.post('/submitAttendance' , async (req,res) => {
@@ -171,6 +153,36 @@ router.post('/getTestInfo', async (req, res) => {
 });
 
 
+router.post("/submitSyllabus", async (req, res) => {
+  const {
+    testName,
+    class: classId,
+    subject,
+    date,
+    maxScore,
+    syllabus,
+  } = req.body;
+
+  try {
+    const testInfo = await TestInfo.findOne({
+      testName: testName,
+      subject: subject,
+      class: classId,
+    });
+
+    if (!testInfo) {
+      return res.status(404).json({ message: "Test not found. Syllabus could not be updated." });
+    }
+
+    testInfo.syllabus = syllabus;
+    await testInfo.save();
+
+    res.status(200).send("Syllabus registered and updated successfully");
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Internal server error");
+  }
+});
 
 
 

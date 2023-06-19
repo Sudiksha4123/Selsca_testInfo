@@ -22,6 +22,12 @@ const TestInfoSchema = new Schema({
     maxScore  : {
         type : Number,
         required : true
+    },
+    gradesDueDate : {
+        type : Date
+    } , 
+    syllabus : {
+        type : String
     }
 })
 
