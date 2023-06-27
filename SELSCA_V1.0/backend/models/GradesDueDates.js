@@ -1,3 +1,4 @@
+/*
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
@@ -16,3 +17,4 @@ const GradesDueDateSchema  = new Schema({
 })
 
 module.exports = GradesDueDate = mongoose.model('GradesDueDate' , GradesDueDateSchema);
+*/

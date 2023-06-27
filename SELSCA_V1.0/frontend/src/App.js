@@ -17,6 +17,8 @@ import Gradesview from './components/student/gradesview.js';
 import ExamDates from './components/admin/ExamDates.js';
 import Syllabus from './components/teacher/Syllabus.js';
 import GradesDueDateForm from './components/admin/GradesDueDates.js';
+//TestInfo file in admin
+import TestInfo from './components/admin/TestInfo.js';
 import Attendance from './components/teacher/Attendance.js';
 
 
@@ -70,6 +72,7 @@ function App() {
         <Route path='userprofile' element={<UserProfile />} />
         <Route path='examDates' element={<ExamDates />} />
         <Route path='gradesDueDates' element={<GradesDueDateForm />} />
+        <Route path='TestInfo' element={<TestInfo />} />
       </Route>
       <Route path='/teacher' element={<TeacherLayout />}>
           <Route path='userprofile' element={<UserProfile />} />

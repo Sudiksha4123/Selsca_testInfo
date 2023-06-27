@@ -125,6 +125,7 @@ const AdminNavbar = () => {
     { text: "Registration", to: "/admin/register"  , src : RegisterIcon , style : {width : "80%" , paddingLeft : "10px"}},
     { text: "Exam Dates", to: "/admin/examDates" , src : DateIcon , style : {width : "80%" , paddingLeft : "10px"}},
     { text: "Grades Due Dates", to: "/admin/gradesDueDates" },
+    { text: "Test Info", to: "/admin/TestInfo" },
   ];
 
   return (

@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const router = express.Router();
 
-const GradesDueDate = require('../models/GradesDueDates');
+//const GradesDueDate = require('../models/GradesDueDates');
 const Attendance = require('../models/Attendance');
 const Class = require("../models/Class");
 const TestInfo = require('../models/TestInfo');
@@ -35,28 +35,64 @@ router.post('/getTestGrades', async (req, res) => {
   }
 });
 
+/*Submits Grades due dates to the attribute grades due dates in the TestInfo model 
+router.post('/submitGradesDueDates' , async (req,res) => {
 
-// router.post('/submitGradesDueDates' , async (req,res) => {
+     const {testName,subject,date} = req.body;
 
-//     const {testName  , classNo, subject, date} = req.body;
+     try {
+       const testInfo = await TestInfo.findOne({testName : testName  , subject : subject })
 
-//     try {
-//       var testInfo = await TestInfo.findOne({testName : testName  , subject : subject })
-//     }
-//     catch (err) {
-//       console.log(err)
-//       res.status(200).send(err)
-//     }
+     if (!testInfo) {
+      console.log("Test not found");
+      return res.status(404).json({ message: "Test not found. Grades due date could not be updated." });
+     }
+     else{
+      testInfo.gradesduedate = date;
+      await testInfo.save();
+      res.status(200).send("Grades due date registered and updated successfully");
+    }
+    } catch (err) {
+     console.log(err);
+     res.status(500).send("Internal server error");
+   }
 
-//     if (testInfo) {
-//       await 
-//     }
+});
+*/
+//New route made to save data to all test info attributes or update some
+router.post('/submitTestInfo' , async (req,res) => {
 
-//     res.send(testInfo)
+  const {testName,Class,subject,date,maxScore,gradesDueDate,syllabus} = req.body;
 
+  try {
+    let testInfo = await TestInfo.findOne({testName : testName  , subject : subject });
 
-    
-// })
+  if (!testInfo) {
+    testInfo = new TestInfo({
+    testName: testName,
+    class: Class,
+    subject: subject,
+    date: date,
+    maxScore: maxScore,
+    syllabus: syllabus,
+    gradesDueDate: gradesDueDate
+    });
+  }else {
+    testInfo.date = date;
+    testInfo.maxScore = maxScore;
+    testInfo.syllabus = syllabus;
+    testInfo.gradesDueDate = gradesDueDate;
+  }
+  await testInfo.save();
+  console.log('Test info registered');
+  return res.status(201).json({ message: "Test info registered and updated successfully" 
+  });
+  } catch (err) {
+  console.log(err);
+  res.status(500).send("Internal server error");
+}
+
+});
 
 
 router.post('/submitAttendance' , async (req,res) => {
@@ -89,7 +125,7 @@ router.post('/submitAttendance' , async (req,res) => {
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
-})
+});
 
 
 
